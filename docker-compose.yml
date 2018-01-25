@@ -2,30 +2,12 @@ version: '2'
 
 services:
 
-  mysql-server:
-    image: mysql
-    environment:
-      MYSQL_DATABASE: ${DATABASE_NAME}
-      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
-#      MYSQL_USER: myweb
-#      MYSQL_PASSWORD: secret
-    ports:
-     - ${MYSQL_PORT}
-    restart: always
-    volumes:
-      - ./docker/mysql/data:/var/lib/mysql
-
   apache-server:
-    image: apps4net/apache:1.1
+    image: apps4net/apache:1.2
 #    image: apache
     ports:
-      - ${APP_PORT}
-#      - "443:443"
-    environment:
-      MYSQL_DATABASE: ${DATABASE_NAME}
-      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      - "80:80"
+      - "443:443"
     restart: always
     volumes:
-      - ./www:/var/www/html
-    links:
-      - mysql-server
+      - ./docker/apache/apache-config.conf:/etc/apache2/sites-enabled/000-default.conf
