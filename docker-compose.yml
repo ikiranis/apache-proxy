@@ -3,8 +3,9 @@ version: '2'
 services:
 
   apache-server:
-    image: apps4net/apache:1.2
-#    image: apache
+    container_name: apache-proxy
+    image: apps4net/apache-proxy:1.0
+#    image: apache-proxy
     ports:
       - "80:80"
       - "443:443"
